@@ -3,16 +3,55 @@ body {
   background-color: #e8eaf6;
 }
 
-h1 {
+h1,
+.greetings {
   color: #7986cb;
   font-size: 144px;
+
+  /* line-height: 1.2; */
 }
 
-.js-clock {
+.container {
   position: absolute;
   top: 50%;
   left: 50%;
 
   transform: translate(-50%, -50%);
+  width: 100%;
   /* line-height: 0; */
+}
+
+.container > * {
+  /* margin: 0 auto; */
+  text-align: center;
+  /* line-height: 1; */
+}
+
+input {
+  font-size: 55px;
+  width: 80%;
+  border: none;
+  background-color: transparent;
+  /* text-align: center; */
+}
+
+input::placeholder {
+  text-align: center;
+}
+
+input:focus {
+  background-color: white;
+}
+
+.greetings {
+  font-size: 89px;
+}
+
+.form,
+.greetings {
+  display: none;
+}
+
+.showing {
+  display: block;
 }
