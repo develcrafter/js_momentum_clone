@@ -1,0 +1,12 @@
+{
+  "name": "cycle_one",
+  "version": "1.0.0",
+  "description": "",
+  "main": "clock.js",
+  "scripts": {
+    "start": "index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
