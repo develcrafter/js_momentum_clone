@@ -5,6 +5,8 @@ const toDoList = document.querySelector(".js-toDoList");
 
 let toDos = [];
 
+let delCount = 0;
+
 const TODO_LS = "toDos";
 
 function paintToDo(text) {
@@ -17,7 +19,7 @@ function paintToDo(text) {
     const span = document.createElement("span");
     span.innerText = text;
 
-    const newId = toDos.length + 1;
+    const newId = toDos.length + delCount + 1;
 
     li.appendChild(delBtn);
     li.appendChild(span);
@@ -49,7 +51,16 @@ function deleteToDo(event) {
     toDos = cleanToDos;
 
     saveToDos();
+
+    delCount++;
 }
+
+// function parseToDos(toDos) {
+//     console.log(1, toDos);
+    
+// }
+
+
 
 function saveToDos() {
     localStorage.setItem(TODO_LS, JSON.stringify(toDos));
@@ -66,7 +77,7 @@ function handleToDoSubmit(event) {
 
 function loadToDos() {
     const loadedToDos = localStorage.getItem(TODO_LS);
-
+    // console.log(loadedToDos);
     if (loadedToDos !== null) {
         const parsedToDos = JSON.parse(loadedToDos);
         parsedToDos.forEach(function (toDo) {
