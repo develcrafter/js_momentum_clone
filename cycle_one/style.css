@@ -15,7 +15,7 @@ form {
   margin-top: 13px;
 }
 
-input {
+input::placeholder {
   text-align: center;
 }
 

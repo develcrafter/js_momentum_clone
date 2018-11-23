@@ -1,101 +1,160 @@
 const toDoForm = document.querySelector(".js-toDoForm"),
-  toDoInput = toDoForm.querySelector("input");
+    toDoInput = toDoForm.querySelector("input");
+
 const toDoList = document.querySelector(".js-toDoList");
+
+let toDos = [];
 
 const TODO_LS = "toDos";
 
-const toDos = [];
+function paintToDo(text) {
+    const li = document.createElement("li");
+    
+    const delBtn = document.createElement("button");
+    delBtn.innerText = "❌"
+    delBtn.addEventListener("click", deleteToDo);
 
-function handleToDoSubmit(event) {
-  event.preventDefault();
+    const span = document.createElement("span");
+    span.innerText = text;
 
-  const currentValue = toDoInput.value;
-  paintToDo(currentValue);
+    const newId = toDos.length + 1;
 
-  toDoInput.value = "";
+    li.appendChild(delBtn);
+    li.appendChild(span);
+    li.id = newId;
+
+    toDoList.appendChild(li);
+
+    const toDoObj = {
+        text: text,
+        id: newId,
+    }
+
+    toDos.push(toDoObj);
+    saveToDos();
+
 }
 
-function paintToDo(text) {
-  const li = document.createElement("li");
-  const delBtn = document.createElement("button");
-  const span = document.createElement("span");
+function deleteToDo(event) {
+    // event.preventDefault();
+    const btn = event.target;
+    const li = btn.parentNode;
 
-  delBtn.innerText = "✔";
-  span.innerText = text;
+    toDoList.removeChild(li);
 
-  li.appendChild(delBtn);
-  li.appendChild(span);
+    const cleanToDos = toDos.filter(function (toDo) {
+        return toDo.id !== parseInt(li.id);
+    })
 
-  const newId = toDos.length + 1;
+    toDos = cleanToDos;
 
-  li.id = newId;
-  toDoList.appendChild(li);
-
-  const toDoObj = {
-    text: text,
-    id: newId
-  };
-
-  toDos.push(toDoObj);
-  saveToDos();
+    saveToDos();
 }
 
 function saveToDos() {
-  localStorage.setItem(TODO_LS, JSON.stringify(toDos));
+    localStorage.setItem(TODO_LS, JSON.stringify(toDos));
+}
+
+function handleToDoSubmit(event) {
+    event.preventDefault();
+
+    const currentValue = toDoInput.value;
+    paintToDo(currentValue);
+
+    toDoInput.value = "";
 }
 
 function loadToDos() {
-  const loadedToDos = localStorage.getItem(TODO_LS);
+    const loadedToDos = localStorage.getItem(TODO_LS);
 
-  if (loadedToDos !== null) {
-    const parsedToDos = JSON.parse(loadedToDos);
-    parsedToDos.forEach(function(toDo) {
-      paintToDo(toDo.text);
-    });
-  }
+    if (loadedToDos !== null) {
+        const parsedToDos = JSON.parse(loadedToDos);
+        parsedToDos.forEach(function (toDo) {
+            paintToDo(toDo.text);
+        })
+    }
 }
 
 function init() {
-  loadToDos();
-  toDoForm.addEventListener("submit", handleToDoSubmit);
+    loadToDos();
+    toDoForm.addEventListener("submit", handleToDoSubmit);
 }
 
 init();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const toDoForm = document.querySelector(".js-toDoForm"),
-//   toDoInput = toDoForm.querySelector("input"),
-//   toDoList = document.querySelector(".js-toDoList");
+//   toDoInput = toDoForm.querySelector("input");
+// const toDoList = document.querySelector(".js-toDoList");
 
-// const TODOS_LOCAL_STORAGE = "toDos";
+// const TODO_LS = "toDos";
 
-// const toDos = [];
+// let toDos = [];
 
-// function saveToDos() {
-//   localStorage.setItem(TODOS_LOCAL_STORAGE, JSON.stringify(toDos));
-// }
+// function deleteToDo(event) {
+//   event.preventDefault();
+//   // console.dir(event.target.parentNode);
+//   const btn = event.target;
+//   const li = btn.parentNode;
+// //   console.dir(li);
 
-// function paintToDo(text) {
-//   const li = document.createElement("li");
+//   toDoList.removeChild(li);
 
-//   const delBtn = document.createElement("button");
-//   delBtn.innerText = "💤";
+//   const cleanToDos = toDos.filter(function(toDo) {
+//     return toDo.id !== parseInt(li.id);
+//   });
 
-//   const span = document.createElement("span");
-//   span.innerText = text;
-
-//   const newId = toDos.length + 1;
-
-//   li.appendChild(span);
-//   li.appendChild(delBtn);
-//   li.id = newId;
-//   toDoList.appendChild(li);
-
-//   const toDoObj = {
-//     text: text,
-//     id: newId
-//   };
-
-//   toDos.push(toDoObj);
+//   toDos = cleanToDos;
 //   saveToDos();
 // }
 
@@ -108,8 +167,38 @@ init();
 //   toDoInput.value = "";
 // }
 
+// function paintToDo(text) {
+//   const li = document.createElement("li");
+//   const delBtn = document.createElement("button");
+//   delBtn.addEventListener("click", deleteToDo);
+//   const span = document.createElement("span");
+
+//   delBtn.innerText = "✔";
+//   span.innerText = text;
+
+//   li.appendChild(delBtn);
+//   li.appendChild(span);
+
+//   const newId = toDos.length + 1;
+
+//   li.id = newId;
+//   toDoList.appendChild(li);
+
+//   const toDoObj = {
+//     text: text,
+//     id: newId
+//   };
+
+//   toDos.push(toDoObj);
+//   saveToDos();
+// }
+
+// function saveToDos() {
+//   localStorage.setItem(TODO_LS, JSON.stringify(toDos));
+// }
+
 // function loadToDos() {
-//   const loadedToDos = localStorage.getItem(TODOS_LOCAL_STORAGE);
+//   const loadedToDos = localStorage.getItem(TODO_LS);
 
 //   if (loadedToDos !== null) {
 //     const parsedToDos = JSON.parse(loadedToDos);
@@ -127,45 +216,109 @@ init();
 // init();
 
 // // const toDoForm = document.querySelector(".js-toDoForm"),
-// //   toDoInput = toDoForm.querySelector("input");
+// //   toDoInput = toDoForm.querySelector("input"),
+// //   toDoList = document.querySelector(".js-toDoList");
 
-// // const toDoList = document.querySelector(".js-toDoList");
+// // const TODOS_LOCAL_STORAGE = "toDos";
 
-// // const TODO_LOCAL_STORAGE = "currentToDo";
+// // const toDos = [];
+
+// // function saveToDos() {
+// //   localStorage.setItem(TODOS_LOCAL_STORAGE, JSON.stringify(toDos));
+// // }
 
 // // function paintToDo(text) {
 // //   const li = document.createElement("li");
+
 // //   const delBtn = document.createElement("button");
-// //   delBtn.innerText = "❌";
+// //   delBtn.innerText = "💤";
+
 // //   const span = document.createElement("span");
 // //   span.innerText = text;
 
+// //   const newId = toDos.length + 1;
+
 // //   li.appendChild(span);
 // //   li.appendChild(delBtn);
+// //   li.id = newId;
 // //   toDoList.appendChild(li);
+
+// //   const toDoObj = {
+// //     text: text,
+// //     id: newId
+// //   };
+
+// //   toDos.push(toDoObj);
+// //   saveToDos();
 // // }
 
 // // function handleToDoSubmit(event) {
 // //   event.preventDefault();
 
 // //   const currentValue = toDoInput.value;
-// //   localStorage.setItem(TODO_LOCAL_STORAGE, currentValue);
 // //   paintToDo(currentValue);
 
 // //   toDoInput.value = "";
 // // }
 
-// // function loadToDo() {
-// //   const currentToDo = localStorage.getItem(TODO_LOCAL_STORAGE);
+// // function loadToDos() {
+// //   const loadedToDos = localStorage.getItem(TODOS_LOCAL_STORAGE);
 
-// //   if (currentToDo !== null) {
-// //     paintToDo(currentToDo);
+// //   if (loadedToDos !== null) {
+// //     const parsedToDos = JSON.parse(loadedToDos);
+// //     parsedToDos.forEach(function(toDo) {
+// //       paintToDo(toDo.text);
+// //     });
 // //   }
 // // }
 
 // // function init() {
-// //   loadToDo();
+// //   loadToDos();
 // //   toDoForm.addEventListener("submit", handleToDoSubmit);
 // // }
 
 // // init();
+
+// // // const toDoForm = document.querySelector(".js-toDoForm"),
+// // //   toDoInput = toDoForm.querySelector("input");
+
+// // // const toDoList = document.querySelector(".js-toDoList");
+
+// // // const TODO_LOCAL_STORAGE = "currentToDo";
+
+// // // function paintToDo(text) {
+// // //   const li = document.createElement("li");
+// // //   const delBtn = document.createElement("button");
+// // //   delBtn.innerText = "❌";
+// // //   const span = document.createElement("span");
+// // //   span.innerText = text;
+
+// // //   li.appendChild(span);
+// // //   li.appendChild(delBtn);
+// // //   toDoList.appendChild(li);
+// // // }
+
+// // // function handleToDoSubmit(event) {
+// // //   event.preventDefault();
+
+// // //   const currentValue = toDoInput.value;
+// // //   localStorage.setItem(TODO_LOCAL_STORAGE, currentValue);
+// // //   paintToDo(currentValue);
+
+// // //   toDoInput.value = "";
+// // // }
+
+// // // function loadToDo() {
+// // //   const currentToDo = localStorage.getItem(TODO_LOCAL_STORAGE);
+
+// // //   if (currentToDo !== null) {
+// // //     paintToDo(currentToDo);
+// // //   }
+// // // }
+
+// // // function init() {
+// // //   loadToDo();
+// // //   toDoForm.addEventListener("submit", handleToDoSubmit);
+// // // }
+
+// // // init();
