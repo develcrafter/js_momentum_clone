@@ -1,0 +1,108 @@
+// const weather = document.querySelector(".js-weather");
+// const WEATHER_API_KEY = "f5e5aeb1c08e92c55e6d7cb0242c595e";
+// const COORDS_LS = "coords";
+
+// function paintWeather(temp, name) {
+//   weather.innerText = `${temp} @ ${name}`;
+// }
+
+// function getWeather(lat, lon) {
+//   fetch(
+//     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=metric`
+//   )
+//     .then(function(response) {
+//       return response.json();
+//     })
+//     .then(function(weatherJson) {
+//       const temperature = weatherJson.main.temp;
+//       const name = weatherJson.name;
+
+//       paintWeather(temperature, name);
+//     });
+// }
+
+// function saveCoords(coordsObj) {
+//   localStorage.setItem(COORDS_LS, JSON.stringify(coordsObj));
+// }
+
+// function handleGeoSuccess(position) {
+//   const latitude = position.coords.latitude;
+//   const longitude = position.coords.longitude;
+
+//   const coordsObj = {
+//     latitude, // latitude: latitude,
+//     longitude // longitude: longitude
+//   };
+
+//   saveCoords(coordsObj);
+
+//   getWeather(latitude, longitude);
+// }
+
+// function handelGeoError() {
+//   console.log("Can't access geo location information!.");
+// }
+
+// function askForCoords() {
+//   navigator.geolocation.getCurrentPosition(handleGeoSuccess, handelGeoError);
+// }
+
+// function loadCoords() {
+//   const loadedCoords = localStorage.getItem(COORDS_LS);
+
+//   if (loadedCoords === null) {
+//     askForCoords();
+//   } else {
+//     const parsedCoords = JSON.parse(loadedCoords);
+//     getWeather(parsedCoords.latitude, parsedCoords.longitude);
+//   }
+// }
+
+// function init() {
+//   loadCoords();
+// }
+
+// init();
+
+// // const COORDS_LS = "coords";
+
+// // function saveCoords(positionObj) {
+// //   localStorage.setItem(COORDS_LS, JSON.stringify(positionObj));
+// // }
+
+// // function handleGeoSuccess(position) {
+// //   // console.log(position);
+
+// //   const latitude = position.coords.latitude;
+// //   const longitude = position.coords.longitude;
+
+// //   const coordsObj = {
+// //     latitude,
+// //     longitude
+// //   };
+
+// //   saveCoords(coordsObj);
+// // }
+
+// // function handleGeoError() {
+// //   console.log("Can't access geo location information.");
+// // }
+
+// // function askForCoords() {
+// //   navigator.geolocation.getCurrentPosition(handleGeoSuccess, handleGeoError);
+// // }
+
+// // function loadCoords() {
+// //   const loadedcoords = localStorage.getItem(COORDS_LS);
+// //   if (loadedcoords === null) {
+// //     askForCoords();
+// //   } else {
+// //     console.log(loadedcoords);
+// //   }
+// // }
+
+// // function init() {
+// //   loadCoords();
+// // }
+
+// // init();
